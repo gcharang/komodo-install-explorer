@@ -104,4 +104,6 @@ ip = $(curl ifconfig.me)
 
 echo -e "$STEP_START[ * ]$STEP_END Execute $i-explorer-start.sh to start the explorer"
 echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer"
+touch webaccess
+echo "$i - http://$ip:$webport"
 
