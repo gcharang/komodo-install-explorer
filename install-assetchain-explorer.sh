@@ -45,7 +45,7 @@ showmetrics=0
 rpcworkqueue=256
 EOF
 
-echo -e "$STEP_START[ * ]$STEP_END Enter your sudo password so that webport: $webport can be opened"
+echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webport: $webport can be opened"
 
 sudo ufw allow $webport
 

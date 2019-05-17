@@ -11,7 +11,7 @@ CUR_DIR=$(pwd)
 echo "Preparing the current directory: $CUR_DIR"
 echo "This script needs to be run only once in a directory. It installs dependencies and komodo's flavour of bitcore-node"
 
-echo -e "$STEP_START[ * ]$STEP_END Installing dependencies"
+echo -e "$STEP_START[ * ]$STEP_END Installing dependencies, might require 'sudo' password"
 sudo apt --yes install git
 sudo apt --yes install build-essential pkg-config libc6-dev libevent-dev m4 g++-multilib autoconf libtool libncurses5-dev unzip git python zlib1g-dev wget bsdmainutils automake libboost-all-dev libssl-dev libprotobuf-dev protobuf-compiler libqt4-dev libqrencode-dev libdb++-dev ntp ntpdate
 sudo apt --yes install libcurl4-gnutls-dev
