@@ -100,7 +100,7 @@ nvm use v4; ./node_modules/bitcore-node-komodo/bin/bitcore-node start
 EOF
 chmod +x $i-explorer-start.sh
 
-ip = $(curl ifconfig.me)
+ip=$(curl ifconfig.me)
 
 echo -e "$STEP_START[ * ]$STEP_END Execute $i-explorer-start.sh to start the explorer"
 echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer"
