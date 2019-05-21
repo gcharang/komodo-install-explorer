@@ -17,7 +17,7 @@ echo -e "$STEP_START[ * ]$STEP_END Modifying $i's '.conf' file at $HOME/.komodo/
 
 declare -a kmd_coins=$i
 
-\. $HOME/.komodo/$i/$i.conf
+. $HOME/.komodo/$i/$i.conf
 
 rpcport=$rpcport
 zmqport=$((rpcport+2))
@@ -50,6 +50,10 @@ echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webpor
 sudo ufw allow $webport
 
 echo -e "$STEP_START[ * ]$STEP_END Installing explorer for $i"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+nvm use v4
 
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create $i-explorer
 cd $i-explorer
@@ -94,7 +98,7 @@ EOF
 cat << EOF > $CUR_DIR/$i-explorer-start.sh
 #!/bin/bash
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 cd $i-explorer
 nvm use v4; ./node_modules/bitcore-node-komodo/bin/bitcore-node start
 EOF
