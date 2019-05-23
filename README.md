@@ -41,12 +41,12 @@ Now run the script: https://github.com/gcharang/komodo-install-explorer/blob/mas
 ./install-assetchain-explorer.sh ASSETCHAINNAME
 ```
 
-**Note:** Use the `noweb` option like so: `./install-assetchain-explorer.sh ASSETCHAINNAME noweb` to stop the script from prompting you to open the port for accessing the explorer through the internet.
-
 This will create a new sub directory named `ASSETCHAINNAME-explorer` and a script named `ASSETCHAINNAME-explorer-start.sh`
-It also adds a line to a file called `webaccess` with the assetchain's name and the url to access the explorer from anywhere else.
+It also adds data to a file called `ASSETCHAINNAME-webaccess` with the assetchain's name and the url to access the explorer from anywhere else.
 
 Start the assetchain with its launch parameters and execute the script `ASSETCHAINNAME-explorer-start.sh` when you want to start the explorer
+
+**Note:** Use the `noweb` option like so: `./install-assetchain-explorer.sh ASSETCHAINNAME noweb` to stop the script from prompting you to open the port for accessing the explorer through the internet; i.e., explorer will only be accessible on the local system
 
 **Note:** When launching the assetchain for the first time after installing the explorer, add the `-reindex` parameter to its launch parameters.
 
@@ -58,7 +58,7 @@ You can also run them one at a time or all together at the same time depending o
 
 The only problem is when the ports of two different assetchains conflict with each other.
 
-In that case, if you wish to run them at the same time, modify the `install-assetchain-explorer.sh` script to have fixed port values that are all distinct and different from the other asstchain's ports. Lets say the assetchain's name is `ASSETCHAINNAME1`, then delete the sub directory named `ASSETCHAINNAME1-explorer` and the script named `ASSETCHAINNAME1-explorer-start.sh` and run the modified `install-assetchain-explorer.sh` with it's name again:
+In that case, if you wish to run them at the same time, modify the `install-assetchain-explorer.sh` script to have fixed port values that are all distinct and different from the other asstchain's ports. Lets say the assetchain's name is `ASSETCHAINNAME1`, then delete the sub directory named `ASSETCHAINNAME1-explorer` and the script named `ASSETCHAINNAME1-explorer-start.sh` and run the modified `install-assetchain-explorer.sh` with its name again:
 
 ```bash
 install-assetchain-explorer.sh ASSETCHAINNAME1
