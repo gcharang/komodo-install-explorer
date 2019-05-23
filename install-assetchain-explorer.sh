@@ -116,6 +116,9 @@ echo -e "$STEP_START[ * ]$STEP_END Execute $i-explorer-start.sh to start the exp
 if [ $# -eq 2 ]; then
   if [ "$2" = "noweb" ]; then
     echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
+    touch $i-webaccess
+    echo "url=http://localhost:$webport" >> $i-webaccess
+    echo "webport=$webport" >> $i-webaccess
   fi  
 else 
   echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer after starting it"
