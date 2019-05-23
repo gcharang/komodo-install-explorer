@@ -48,6 +48,7 @@ EOF
 if [ $# -eq 2 ]; then
   if [ "$2" = "noweb" ]; then
     echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
+  fi  
 else  
   echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webport: $webport can be opened"
   sudo ufw allow $webport
