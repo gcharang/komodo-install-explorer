@@ -128,3 +128,25 @@ else
 fi  
 echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your computer to access the explorer after starting it"
 
+echo "Patching the installation to display notarization data"
+
+git clone https://github.com/gcharang/explorer-notarized 
+cd explorer-notarized
+./patch $i
+
+if [ ! -d "$CUR_DIR/explorer-notarized" ]; then
+  echo "Cloning the repository cointaining the patch"
+  success=0
+  count=1
+  while [ $success -eq 0 ]; do
+    echo "[Try $count] Cloning the explorer installer repository"
+    git clone https://github.com/gcharang/explorer-notarized && success=1 || success=0
+    sleep 4
+    count=$((count+1))
+  done
+else
+  echo "A directory named 'explorer-notarized' already exists; assuming it is cloned from the repo: https://github.com/gcharang/explorer-notarized , trying to patch the explorer using it"
+fi
+
+cd explorer-notarized
+./patch $i
