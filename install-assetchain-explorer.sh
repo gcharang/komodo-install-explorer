@@ -119,8 +119,9 @@ if [ $# -eq 2 ]; then
   fi  
 else 
   echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer after starting it"
-  touch webaccess
-  echo "$i - http://$ip:$webport" >> webaccess
+  touch $i-webaccess
+  echo "url=http://$ip:$webport" >> $i-webaccess
+  echo "webport=$webport" >> $i-webaccess
 fi  
 echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your computer to access the explorer after starting it"
 
