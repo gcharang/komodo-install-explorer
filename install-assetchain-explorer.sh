@@ -20,8 +20,8 @@ declare -a kmd_coins=$i
 . $HOME/.komodo/$i/$i.conf
 
 rpcport=$rpcport
-zmqport=$((rpcport+2))
-webport=$((rpcport+3))
+zmqport=$((rpcport+1))
+webport=$((rpcport+2))
 
 rm $HOME/.komodo/$i/$i.conf
 
@@ -45,9 +45,14 @@ showmetrics=0
 rpcworkqueue=256
 EOF
 
-echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webport: $webport can be opened"
+if [ $# -eq 2 ]; then
+  if [ "$2" = "noweb" ]; then
+    echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
+else  
+  echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webport: $webport can be opened"
+  sudo ufw allow $webport
+fi
 
-sudo ufw allow $webport
 
 echo -e "$STEP_START[ * ]$STEP_END Installing explorer for $i"
 
@@ -107,7 +112,13 @@ chmod +x $i-explorer-start.sh
 ip=$(curl ifconfig.me)
 
 echo -e "$STEP_START[ * ]$STEP_END Execute $i-explorer-start.sh to start the explorer"
-echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer"
-touch webaccess
-echo "$i - http://$ip:$webport" >> webaccess
+if [ $# -eq 2 ]; then
+  if [ "$2" = "noweb" ]; then
+    echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
+else 
+  echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer after starting it"
+  touch webaccess
+  echo "$i - http://$ip:$webport" >> webaccess
+fi  
+echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your computer to access the explorer after starting it"
 

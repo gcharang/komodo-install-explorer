@@ -41,6 +41,8 @@ Now run the script: https://github.com/gcharang/komodo-install-explorer/blob/mas
 ./install-assetchain-explorer.sh ASSETCHAINNAME
 ```
 
+**Note:** Use the `noweb` option like: `./install-assetchain-explorer.sh ASSETCHAINNAME noweb` to stop the script from prompting you to open the port for accessing the explorer through the internet.
+
 This will create a new sub directory named `ASSETCHAINNAME-explorer` and a script named `ASSETCHAINNAME-explorer-start.sh`
 It also adds a line to a file called `webaccess` with the assetchain's name and the url to access the explorer from anywhere else.
 
