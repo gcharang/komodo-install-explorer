@@ -20,7 +20,7 @@ sudo apt --yes install curl
 echo -e "$STEP_START[ * ]$STEP_END Installing NodeJS and Bitcore Node"
 
 # install nodejs and other stuff
-sudo apt --yes install libsodium-dev npm
+sudo apt --yes install libsodium-dev
 sudo apt --yes install libzmq3-dev
 
 # install nvm
