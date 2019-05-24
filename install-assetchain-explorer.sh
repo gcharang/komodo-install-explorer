@@ -130,10 +130,6 @@ echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your compu
 
 echo "Patching the installation to display notarization data"
 
-git clone https://github.com/gcharang/explorer-notarized 
-cd explorer-notarized
-./patch $i
-
 if [ ! -d "$CUR_DIR/explorer-notarized" ]; then
   echo "Cloning the repository cointaining the patch"
   success=0
