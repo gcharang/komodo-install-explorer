@@ -63,7 +63,7 @@ nvm use v4
 
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create $i-explorer
 cd $i-explorer
-$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/DeckerSU/insight-api-komodo git+https://git@github.com/DeckerSU/insight-ui-komodo
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/gcharang/insight-api-komodo git+https://git@github.com/gcharang/insight-ui-komodo
 cd $CUR_DIR
 
 cat << EOF > $CUR_DIR/$i-explorer/bitcore-node.json
