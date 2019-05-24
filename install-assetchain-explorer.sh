@@ -20,8 +20,8 @@ declare -a kmd_coins=$i
 . $HOME/.komodo/$i/$i.conf
 
 rpcport=$rpcport
-zmqport=$((rpcport+1))
-webport=$((rpcport+2))
+zmqport=$((rpcport+2))
+webport=$((rpcport+3))
 
 rm $HOME/.komodo/$i/$i.conf
 
