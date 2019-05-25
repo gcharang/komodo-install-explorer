@@ -145,4 +145,4 @@ else
 fi
 
 cd explorer-notarized
-./patch.sh $i
+# ./patch.sh $i
