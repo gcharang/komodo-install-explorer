@@ -30,5 +30,5 @@ export NVM_DIR="$HOME/.nvm"
 # switch node setup with nvm
 nvm install v4
 
-npm install git+https://git@github.com/gcharang/bitcore-node-komodo # npm install bitcore
+npm install git+https://git@github.com/DeckerSU/bitcore-node-komodo # npm install bitcore
 
