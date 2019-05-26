@@ -141,8 +141,10 @@ if [ ! -d "$CUR_DIR/explorer-notarized" ]; then
     count=$((count+1))
   done
 else
-  echo "A directory named 'explorer-notarized' already exists; assuming it is cloned from the repo: https://github.com/gcharang/explorer-notarized , trying to patch the explorer using it"
+  echo "A directory named 'explorer-notarized' already exists; assuming it is cloned from the repo: https://github.com/gcharang/explorer-notarized , trying to update patch the explorer using it"
+  cd $CUR_DIR/explorer-notarized
+  git pull
 fi
 
-cd explorer-notarized
+cd $CUR_DIR/explorer-notarized
 ./patch.sh $i
