@@ -42,7 +42,7 @@ Now run the script: https://github.com/gcharang/komodo-install-explorer/blob/mas
 ```
 
 This will create a new sub directory named `SMARTCHAINNAME-explorer` and a script named `SMARTCHAINNAME-explorer-start.sh`
-It also adds data to a file called `SMARTCHAINNAME-webaccess` with the assetchain's name and the url to access the explorer from anywhere else.
+It also adds data to a file called `SMARTCHAINNAME-webaccess` with the Smart Chain's name and the url to access the explorer from anywhere else.
 
 Start the assetchain with its launch parameters and execute the script `SMARTCHAINNAME-explorer-start.sh` when you want to start the explorer
 
