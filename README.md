@@ -63,3 +63,10 @@ In that case, if you wish to run them at the same time, modify the `install-asse
 ```bash
 install-assetchain-explorer.sh SMARTCHAINNAME1
 ```
+### Customisation
+UI assets are located under YOURCHAIN-explorer/node_modules/insight-ui-komodo/public
+Change logo - YOURCHAIN-explorer/node_modules/insight-ui-komodo/public/img/logo.png
+Change currency - YOURCHAIN-explorer/node_modules/insight-ui-komodo/public/js/main.min.js
+Change page headings - YOURCHAIN-explorer/node_modules/insight-ui-komodo/public/js/src/config.js
+Change page headings - YOURCHAIN-explorer/node_modules/insight-ui-komodo/public/index.html
+
