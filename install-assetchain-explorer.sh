@@ -6,7 +6,7 @@
 
 if [ $# -eq 0 ]; then
     echo "No arguments provided. You need to add the assetchain ticker as a parameter"
-    echo "For example: ./install-assetchain-explorer.sh TOKEL
+    echo "For example: ./install-assetchain-explorer.sh TOKEL"
     exit 1
 fi
 
