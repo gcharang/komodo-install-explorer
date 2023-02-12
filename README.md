@@ -42,17 +42,17 @@ Now run the script: https://github.com/gcharang/komodo-install-explorer/blob/mas
 ```
 
 This will create a new sub directory named `SMARTCHAINNAME-explorer` and a script named `SMARTCHAINNAME-explorer-start.sh`
-It also adds data to a file called `SMARTCHAINNAME-webaccess` with the assetchain's name and the url to access the explorer from anywhere else.
+It also adds data to a file called `SMARTCHAINNAME-webaccess` with the Smart Chain's name and the url to access the explorer from the internet.
 
-Start the assetchain with its launch parameters and execute the script `SMARTCHAINNAME-explorer-start.sh` when you want to start the explorer
+Start the Smart Chain with its launch parameters and execute the script `SMARTCHAINNAME-explorer-start.sh` when you want to start the explorer
 
 **Note:** Use the `noweb` option like so: `./install-assetchain-explorer.sh SMARTCHAINNAME noweb` to stop the script from prompting you to open the port for accessing the explorer through the internet; i.e., explorer will only be accessible on the local system
 
 **Note:** When launching the Smart Chain for the first time after installing the explorer, add the `-reindex` parameter to its launch parameters.
 
-### Adding another assetchain's explorer and running it at the same time
+### Adding another Smart Chain's explorer and running it at the same time
 
-You can use the `./install-assetchain-explorer.sh SMARTCHAINNAME` command to create explorers for as many asset chains as you want, just by changing the `SMARTCHAINNAME`
+You can use the `./install-assetchain-explorer.sh SMARTCHAINNAME` command to create explorers for as many Smart Chains as you want, just by changing the `SMARTCHAINNAME`
 
 You can also run them one at a time or all together at the same time depending on your needs.
 

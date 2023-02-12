@@ -4,30 +4,36 @@
 # (c) Decker, 2018
 #
 
+if [ $# -eq 0 ]; then
+    echo "No arguments provided. You need to add the assetchain ticker as a parameter"
+    echo "For example: ./install-assetchain-explorer.sh TOKEL"
+    exit 1
+fi
+
 STEP_START='\e[1;47;42m'
 STEP_END='\e[0m'
 
-i=$1
+ac=$1
 
 CUR_DIR=$(pwd)
-echo "Installing an explorer for $i in the current directory: $CUR_DIR"
+echo "Installing an explorer for $ac in the current directory: $CUR_DIR"
 
-echo -e "$STEP_START[ * ]$STEP_END Modifying $i's '.conf' file at $HOME/.komodo/$i/$i.conf"
+echo -e "$STEP_START[ * ]$STEP_END Modifying $ac's '.conf' file at $HOME/.komodo/$ac/$ac.conf"
 
 
-declare -a kmd_coins=$i
+declare -a kmd_coins=$ac
 
-. $HOME/.komodo/$i/$i.conf
+. $HOME/.komodo/$ac/$ac.conf
 
 rpcport=$rpcport
 zmqport=$((rpcport+2))
 webport=$((rpcport+3))
 
-rm $HOME/.komodo/$i/$i.conf
+rm $HOME/.komodo/$ac/$ac.conf
 
-mkdir -p $HOME/.komodo/$i
-touch $HOME/.komodo/$i/$i.conf
-cat <<EOF > $HOME/.komodo/$i/$i.conf
+mkdir -p $HOME/.komodo/$ac
+touch $HOME/.komodo/$ac/$ac.conf
+cat <<EOF > $HOME/.komodo/$ac/$ac.conf
 server=1
 whitelist=127.0.0.1
 txindex=1
@@ -55,18 +61,18 @@ else
 fi
 
 
-echo -e "$STEP_START[ * ]$STEP_END Installing explorer for $i"
+echo -e "$STEP_START[ * ]$STEP_END Installing explorer for $ac"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 nvm use v4
 
-$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create $i-explorer
-cd $i-explorer
+$CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node create ${ac}-explorer
+cd ${ac}-explorer
 $CUR_DIR/node_modules/bitcore-node-komodo/bin/bitcore-node install git+https://git@github.com/DeckerSU/insight-api-komodo git+https://git@github.com/DeckerSU/insight-ui-komodo
 cd $CUR_DIR
 
-cat << EOF > $CUR_DIR/$i-explorer/bitcore-node.json
+cat << EOF > $CUR_DIR/${ac}-explorer/bitcore-node.json
 {
   "network": "mainnet",
   "port": $webport,
@@ -101,30 +107,30 @@ cat << EOF > $CUR_DIR/$i-explorer/bitcore-node.json
 EOF
 
 # creating launch script for explorer
-cat << EOF > $CUR_DIR/$i-explorer-start.sh
+cat << EOF > $CUR_DIR/${ac}-explorer-start.sh
 #!/bin/bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-cd $i-explorer
+cd ${ac}-explorer
 nvm use v4; ./node_modules/bitcore-node-komodo/bin/bitcore-node start
 EOF
-chmod +x $i-explorer-start.sh
+chmod +x ${ac}-explorer-start.sh
 
 ip=$(curl ifconfig.me)
 
-echo -e "$STEP_START[ * ]$STEP_END Execute $i-explorer-start.sh to start the explorer"
+echo -e "$STEP_START[ * ]$STEP_END Execute ${ac}-explorer-start.sh to start the explorer"
 if [ $# -eq 2 ]; then
   if [ "$2" = "noweb" ]; then
     echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
-    touch $i-webaccess
-    echo "url=http://localhost:$webport" >> $i-webaccess
-    echo "webport=$webport" >> $i-webaccess
+    touch ${ac}-webaccess
+    echo "url=http://localhost:$webport" >> ${ac}-webaccess
+    echo "webport=$webport" >> ${ac}-webaccess
   fi  
 else 
   echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer after starting it"
-  touch $i-webaccess
-  echo "url=http://$ip:$webport" >> $i-webaccess
-  echo "webport=$webport" >> $i-webaccess
+  touch ${ac}-webaccess
+  echo "url=http://$ip:$webport" >> ${ac}-webaccess
+  echo "webport=$webport" >> ${ac}-webaccess
 fi  
 echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your computer to access the explorer after starting it"
 
@@ -147,4 +153,4 @@ else
 fi
 
 cd $CUR_DIR/explorer-notarized
-./patch.sh $i
+./patch.sh ${ac}
