@@ -17,49 +17,55 @@ ac=$1
 
 CUR_DIR=$(pwd)
 echo "Installing an explorer for $ac in the current directory: $CUR_DIR"
+if [[ "$ac" == "KMD"  ]]; then
+  conf_dir="${HOME}/.komodo"
+  conf_file="komodo.conf"
+  conf_path="${conf_dir}/${conf_file}"
+else
+  echo -e "$STEP_START[ * ]$STEP_END Modifying $ac's '.conf' file at $HOME/.komodo/$ac/$ac.conf"
+  conf_dir="${HOME}/.komodo/${ac}"
+  conf_file="${ac}.conf"
+  conf_path="${conf_dir}/${conf_file}"
+fi
 
-echo -e "$STEP_START[ * ]$STEP_END Modifying $ac's '.conf' file at $HOME/.komodo/$ac/$ac.conf"
-
+. ${conf_path}
+echo -e "$STEP_START[ * ]$STEP_END Modifying $ac's '.conf' file at ${conf_path}"
 
 declare -a kmd_coins=$ac
-
-. $HOME/.komodo/$ac/$ac.conf
 
 rpcport=$rpcport
 zmqport=$((rpcport+2))
 webport=$((rpcport+3))
 
-rm $HOME/.komodo/$ac/$ac.conf
-
-mkdir -p $HOME/.komodo/$ac
-touch $HOME/.komodo/$ac/$ac.conf
-cat <<EOF > $HOME/.komodo/$ac/$ac.conf
-server=1
-whitelist=127.0.0.1
-txindex=1
-addressindex=1
-timestampindex=1
-spentindex=1
-zmqpubrawtx=tcp://127.0.0.1:$zmqport
-zmqpubhashblock=tcp://127.0.0.1:$zmqport
-rpcallowip=127.0.0.1
-rpcport=$rpcport
-rpcuser=$rpcuser
-rpcpassword=$rpcpassword
-uacomment=bitcore
-showmetrics=0
-rpcworkqueue=256
+rm $conf_path
+mkdir -p $conf_dir
+touch $conf_path
+cat <<EOF > $conf_path
+    server=1
+    whitelist=127.0.0.1
+    txindex=1
+    addressindex=1
+    timestampindex=1
+    spentindex=1
+    zmqpubrawtx=tcp://127.0.0.1:$zmqport
+    zmqpubhashblock=tcp://127.0.0.1:$zmqport
+    rpcallowip=127.0.0.1
+    rpcport=$rpcport
+    rpcuser=$rpcuser
+    rpcpassword=$rpcpassword
+    uacomment=bitcore
+    showmetrics=0
+    rpcworkqueue=256
 EOF
 
 if [ $# -eq 2 ]; then
   if [ "$2" = "noweb" ]; then
     echo "The webport hasn't been opened; To access the explorer through the internet, open the port: $webport by executing the command 'sudo ufw allow $webport' "
-  fi  
-else  
+  fi
+else
   echo -e "$STEP_START[ * ]$STEP_END Enter your 'sudo' password so that the webport: $webport can be opened"
   sudo ufw allow $webport
 fi
-
 
 echo -e "$STEP_START[ * ]$STEP_END Installing explorer for $ac"
 
@@ -97,8 +103,8 @@ cat << EOF > $CUR_DIR/${ac}-explorer/bitcore-node.json
   "insight-api-komodo": {
     "rateLimiterOptions": {
       "whitelist": ["::ffff:127.0.0.1","127.0.0.1"],
-      "whitelistLimit": 500000, 
-      "whitelistInterval": 3600000 
+      "whitelistLimit": 500000,
+      "whitelistInterval": 3600000
     }
   }
   }
@@ -125,13 +131,13 @@ if [ $# -eq 2 ]; then
     touch ${ac}-webaccess
     echo "url=http://localhost:$webport" >> ${ac}-webaccess
     echo "webport=$webport" >> ${ac}-webaccess
-  fi  
-else 
+  fi
+else
   echo -e "$STEP_START[ * ]$STEP_END Visit http://$ip:$webport from another computer to access the explorer after starting it"
   touch ${ac}-webaccess
   echo "url=http://$ip:$webport" >> ${ac}-webaccess
   echo "webport=$webport" >> ${ac}-webaccess
-fi  
+fi
 echo -e "$STEP_START[ * ]$STEP_END Visit http://localhost:$webport on your computer to access the explorer after starting it"
 
 echo "Patching the installation to display notarization data"
